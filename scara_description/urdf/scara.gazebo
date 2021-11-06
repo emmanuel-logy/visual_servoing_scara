@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- Link1 -->
+  <gazebo reference="link1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Link2 -->
+  <gazebo reference="link2">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Link3 -->
+  <gazebo reference="link3">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>
+
+<!-- [-2.09, 1.04] [-1.39, 2.65], [0.52, 1.04] [-1.04, -1.04][-0.52, -0.52] [-0.52, 0.52]-->
