@@ -3,11 +3,11 @@
 <robot name="scara" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Constants for robot dimensions -->
-  <xacro:property name="PI" value="3.1415926535897931"/>
   <xacro:property name="mass" value="0.2" /> <!-- arbitrary value for mass -->
   <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
   <xacro:property name="height1" value="0.5" /> <!-- Link 1 -->
-  <xacro:property name="height2" value="0.5" /> <!-- Link 2 -->
+  <xacro:property name="height1_offset" value="0.25" /> <!-- Link 1 -->
+  <xacro:property name="height2" value="0.35" /> <!-- Link 2 -->
   <xacro:property name="height3" value="0.25" /> <!-- Link 3 -->
   <xacro:property name="axel_offset" value="${width/2}" /> <!-- Space btw top of beam and the each joint -->
 
@@ -25,7 +25,7 @@
     <child link="link1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="30" velocity="1.0" lower="-1.57" upper="1.57" />
+    <limit effort="30" velocity="1.0" lower="${-pi/2}" upper="${pi/2}" />
     <dynamics damping="0.7"/>
   </joint>
 
@@ -52,31 +52,65 @@
       <inertia
     	  ixx="1.0" ixy="0.0" ixz="0.0"
           iyx="0.0" iyy="1.0" iyz="0.0"
+          izx="0.0" izy="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!-- For offset link -->
+  <joint name="joint1_offset" type="fixed">
+    <parent link="link1"/>
+    <child link="link1_offset"/>
+    <origin xyz="0 0 ${height1 + axel_offset}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Offset Link -->
+  <link name="link1_offset">
+    <collision>
+      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <geometry>
+          <box size="${width} ${width} ${height1_offset}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <geometry>
+          <box size="${width} ${width} ${height1_offset}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <mass value="${mass}"/>
+      <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyx="0.0" iyy="1.0" iyz="0.0"
           izx="1.0" izy="0.0" izz="1.0"/>
     </inertial>
   </link>
 
   <!-- Middle Rev Joint2 -->
   <joint name="joint2" type="revolute">
-    <parent link="link1"/>
+    <parent link="link1_offset"/>
     <child link="link2"/>
-    <origin xyz="0 0 ${height1 + axel_offset}" rpy="-1.5708 0 0"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="30" velocity="1.0" lower="-1.57" upper="1.57" />
+    <origin xyz="0 ${height1_offset/2 - axel_offset} ${axel_offset*2}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="30" velocity="1.0" lower="-${pi/2}" upper="${pi/2}" />
     <dynamics damping="0.7"/>
   </joint>
 
   <!-- Middle Link -->
   <link name="link2">
     <collision>
-      <origin xyz="0 0 ${height2/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
       <geometry>
           <box size="${width} ${width} ${height2}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 0 ${height2/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
       <geometry>
           <box size="${width} ${width} ${height2}"/>
       </geometry>
@@ -84,7 +118,7 @@
     </visual>
 
     <inertial>
-      <origin xyz="0 0 ${height2/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
       <mass value="${mass}"/>
       <inertia
           ixx="1.0" ixy="0.0" ixz="0.0"
@@ -97,8 +131,10 @@
   <joint name="joint3" type="prismatic">
     <parent link="link2"/>
     <child link="link3"/>
-    <origin xyz="0 0 ${height2}" rpy="-1.5708 0 0"/>
-    <limit effort="30" velocity="1.0" lower="${height3}" upper="${height3+height3}" />
+    <origin xyz="0 ${height2 + axel_offset/2} 0" rpy="${pi} 0 0"/>
+    <!-- Limits are from the link origin and not the joint origins -->
+    <!-- limit effort="30" velocity="1.0" upper="${-height3/2 + axel_offset}" lower="${height3 - 2*axel_offset}" /-->
+    <limit effort="30" velocity="1.0" lower="0" upper="${-height3/2 + axel_offset}"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="0.7"/>
   </joint>
@@ -106,14 +142,14 @@
   <!-- Final Link -->
   <link name="link3">
     <collision>
-      <origin xyz="0 0 ${height3/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
       <geometry>
           <box size="${width} ${width} ${height3}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 0 ${height3/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
       <geometry>
           <box size="${width} ${width} ${height3}"/>
       </geometry>
@@ -121,7 +157,7 @@
     </visual>
 
     <inertial>
-      <origin xyz="0 0 ${height3/2 - axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
       <mass value="${mass}"/>
       <inertia
           ixx="1.0" ixy="0.0" ixz="0.0"
@@ -133,10 +169,10 @@
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor1">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -144,10 +180,10 @@
   <transmission name="tran2">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint2">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor2">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -155,10 +191,10 @@
   <transmission name="tran3">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint3">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor3">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
