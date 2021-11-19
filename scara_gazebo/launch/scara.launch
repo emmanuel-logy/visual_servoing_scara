@@ -10,7 +10,7 @@
     </include>
 
     <!-- Spawn a robot into Gazebo -->
-    <param  name="robot_description" command="$(find xacro)/xacro $(find scara-gazebo)/scara_description/urdf/scara.xacro"/>
+    <param  name="robot_description" command="$(find xacro)/xacro $(find scara_gazebo)/scara_description/urdf/scara.xacro"/>
     <node   name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
             args="-urdf -model scara
                   -param robot_description

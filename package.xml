@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
 
-    <name>scara-gazebo</name>
+    <name>scara_gazebo</name>
     <version>0.0.0</version>
     <description>The RBE500 Group Assignment Scara package</description>
     <url type="website">git</url>
@@ -16,6 +16,7 @@
     <depend>rospy</depend>
     <depend>std_msgs</depend>
     <depend>sensor_msgs</depend>
+    <depend>geometry_msgs</depend>
     <build_depend>message_generation</build_depend>
     <exec_depend>message_runtime</exec_depend>
 

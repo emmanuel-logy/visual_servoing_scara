@@ -1,1 +1,1 @@
-# scara-gazebo
+# scara_gazebo
