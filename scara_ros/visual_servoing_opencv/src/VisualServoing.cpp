@@ -40,8 +40,13 @@ namespace scara
 
 	void VisualServoing::update_timer_callback()
 	{
+<<<<<<< HEAD
+		ROS_INFO("!!! Target Locked !!!");
+
+=======
 
 		std::cout << "Timer called" << std::endl;
+>>>>>>> ea81a5977bfdfcb812a2a96024af55bb17b151fd
 		m_desired_q[2] = 0.4;							// 0.35 based on table heigth for prsimatic joint to touch the object
 		m_ROS_Logistics->call_velCmd_srv(m_desired_q);
 		ros::Duration(0.5).sleep();						// wait for 0.5 sec before retracting the prsimatic joint

@@ -1,0 +1,5 @@
+media filter=lfs diff=lfs merge=lfs -text
+log_rosbags/ filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+2022-01-20-23-08-32.bag filter=lfs diff=lfs merge=lfs -text
+log_rosbag/2022-01-20-23-08-32.bag filter=lfs diff=lfs merge=lfs -text
