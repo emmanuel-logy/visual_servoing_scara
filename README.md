@@ -7,7 +7,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ##### Demo 1 - Visual Servoing . . . *in action* !!!
 > *The goal for the SCARA robot is to track the center of the object and hit the target only after the end effector stablizes after the Visual Servoing process is applied.*
 <p float="left">
-  <img src="media/demo1_PBVS.gif" height="480" width="896" />
+  <img src="media/demo1_PBVS.gif" height="360" width="480" />
 </p>
 
 
@@ -15,14 +15,14 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 > **Why is this useful?** <br>
 *Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same process. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 <p float="left">
-  <img src="media/demo2_rosbag.gif" height="480" width="896" />
+  <img src="media/demo2_rosbag.gif" height="360" width="480" />
 </p>
 
 
 ##### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!
 >*The plots represent the movement of joints during the visual servoing process. As we can observe, the change in them is gradual and this shows that the controller I've implemented and the PID gains tuned are doing a great job.  
 <p float="left">
-  <img src="media/demo3_plots.gif" height="480" width="896" />
+  <img src="media/demo3_plots.gif" height="360" width="480" />
 </p>
 
 
