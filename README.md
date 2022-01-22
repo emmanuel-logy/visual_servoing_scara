@@ -5,26 +5,28 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 ##### Demo 1 - Visual Servoing . . . *in action* !!!
-> *The goal for the SCARA robot is to track the center of the object and hit the target only after the end effector stablizes after the Visual Servoing process is applied.*
-<p float="left">
-  <img src="media/demo1_PBVS.gif" height="360" width="480" />
-</p>
+<figure>
+    <img src="media/demo1_PBVS.gif" height="360" width="672">
+    <figcaption><i>The goal for the SCARA robot is to track the center of the object and hit the target once the end effector stabilizes.</i></figcaption>
+</figure>
+
 
 
 ##### Demo 2 - Visual Servoing . . . *playback using rosbag* !!!
+<figure>
+    <img src="media/demo2_rosbag.gif" height="360" width="672" />
+    <figcaption><i>Here the original environment is changed by moving the table aside. However, we can make the robot behave as it did before using recorded information through rosbag utility.</i></figcaption>
+</figure>
+
 > **Why is this useful?** <br>
-*Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same process. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
-<p float="left">
-  <img src="media/demo2_rosbag.gif" height="360" width="480" />
-</p>
+*Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 
 
-##### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!
->*The plots represent the movement of joints during the visual servoing process. As we can observe, the change in them is gradual and this shows that the controller I've implemented and the PID gains tuned are doing a great job.  
-<p float="left">
-  <img src="media/demo3_plots.gif" height="360" width="480" />
-</p>
-
+##### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!  
+<figure>
+    <img src="media/demo3_plots.gif" height="360" width="672" />
+    <figcaption><i>The plots represent the movement of each joint during the visual servoing process. As we can observe, the change is gradual and this shows that the controller I've implemented and the PID gains tuned are doing a pretty good job.</i></figcaption>
+</figure>
 
 
 
@@ -32,27 +34,23 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 ---
 ### Deployment Diagram using UML
+<figure>
+    <img src="media/Deployment_Diagram.png" height="420" width="784" />
+    <figcaption><i>As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
+</figure>
+
 Deployment diagrams are a useful tool to get the BIG PICTURE of how the nodes are running and interacting with each other, especially in a multiple process environment like this one. 
 
 The boxes highlighted in the <span style="color:blue">blue</span> are the nodes written by me. The phrases represented in the <span style="color:blue">blue</span> font are the topics and services being provided by the nodes developed by me. 
-
-<p float="left">
-  <img src="media/Deployment_Diagram.png" height="480" width="896" />
-</p>
-
-> *As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.*
-
-
 
 
 
 ---
 ### High Level Design
-The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.
-<p float="left">
-  <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
-</p>
-
+<figure>
+    <img src="media/Logic_BlockDiagram.png" height="420" width="784" />
+    <figcaption><i>The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.</i></figcaption>
+</figure>
 
 
 
@@ -155,14 +153,18 @@ To build from source, clone the latest version from this repository into your ca
 	
 	$ roslaunch scara_gazebo scara.launch
 
-* **[Optional]**:
+* **[Optional 1]**:
 
     - **scara_control.yaml** <br>
     This file can be used to vary the PID gains for my custom velocity controller.
     - **scara_config.yaml** <br>
     This file can be used to change the diemensions of the robot on the fly.
 
-
+* **[Optional 2]**: 
+    - **scara_control.yaml** <br>
+    To play back the rosbag	
+    
+	$ rosbag play 2022-01-22-16-27-57.bag /scara/camera1/image_raw:=/rec_vid
 
 ---
     

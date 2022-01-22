@@ -39,7 +39,7 @@ namespace scara
 		void callback_timer(const ros::TimerEvent&);
 
 		// called by m_visual_servo to restart one-shot timer when target is locked
-		void reset_timer();
+		void reset_timer(const double& time_period);
 
 		// For rosbag cmdline to record the processed image
 		void pub_processedImg(const cv::Mat& cv_img);
@@ -69,8 +69,6 @@ namespace scara
 		ros::Publisher m_pub_processedImg;
 
 		ros::Timer m_stablize_wait_timer;
-
-		double m_stablize_wait_time;
 
 
 		/* Image Processing Stuff */

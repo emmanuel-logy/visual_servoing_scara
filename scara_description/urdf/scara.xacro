@@ -52,7 +52,7 @@
       <geometry>
           <box size="${W} ${W} ${L1}"/>
       </geometry>
-      <material name="orange"/>
+      <material name="white"/>
     </visual>
 
     <inertial>
@@ -86,7 +86,7 @@
       <geometry>
           <box size="${W} ${W} ${L2}"/>
       </geometry>
-      <material name="orange"/>
+      <material name="white"/>
     </visual>
 
     <inertial>
@@ -123,7 +123,7 @@
       <geometry>
           <box size="${W} ${W} ${L3}"/>
       </geometry>
-      <material name="orange"/>
+      <material name="white"/>
     </visual>
 
     <inertial>
@@ -161,7 +161,7 @@
       <geometry>
           <box size="${W} ${W} ${L4}"/>
       </geometry>
-      <material name="orange"/>
+      <material name="white"/>
     </visual>
 
     <inertial>

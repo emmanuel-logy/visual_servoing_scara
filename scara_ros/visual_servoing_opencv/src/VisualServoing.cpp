@@ -40,20 +40,15 @@ namespace scara
 
 	void VisualServoing::update_timer_callback()
 	{
-<<<<<<< HEAD
 		ROS_INFO("!!! Target Locked !!!");
 
-=======
-
-		std::cout << "Timer called" << std::endl;
->>>>>>> ea81a5977bfdfcb812a2a96024af55bb17b151fd
 		m_desired_q[2] = 0.4;							// 0.35 based on table heigth for prsimatic joint to touch the object
 		m_ROS_Logistics->call_velCmd_srv(m_desired_q);
 		ros::Duration(0.5).sleep();						// wait for 0.5 sec before retracting the prsimatic joint
 		m_desired_q[2] = 0;
-		m_ROS_Logistics->call_velCmd_srv(m_desired_q);	// wait for 1.5 sec to allow retracting the prsimatic joint to home pos
-		ros::Duration(1).sleep();
-
+		m_ROS_Logistics->call_velCmd_srv(m_desired_q);
+		ros::Duration(2.5).sleep();						// wait for 0.5 sec to allow retracting the prsimatic joint to home pos
+														// wait for 2.0 second to allow for moving the object to trigger again for same position
 		m_hit_target = true;
 	}
 
@@ -220,8 +215,8 @@ namespace scara
 		/* -------------------------------------------------------------------------------------------------------------------------- */
 		// [5] When the feature is tracked succesfully, i.e. when circle center coincides with center of pixel frame,
 		//	   make the prismatic joint hit the target point
-		cv::Point err_lower_bound = m_refCenter_in_pixelFrame - cv::Point(2,2);
-		cv::Point err_higher_bound = m_refCenter_in_pixelFrame + cv::Point(2,2);
+		cv::Point err_lower_bound = m_refCenter_in_pixelFrame - cv::Point(1,1);
+		cv::Point err_higher_bound = m_refCenter_in_pixelFrame + cv::Point(1,1);
 		if ( (m_currentCenter_in_pixelFrame.x >= err_lower_bound.x && m_currentCenter_in_pixelFrame.y >= err_lower_bound.y) ||
 			 (m_currentCenter_in_pixelFrame.x <= err_higher_bound.x && m_currentCenter_in_pixelFrame.y <= err_higher_bound.y) )
 		{
@@ -229,8 +224,8 @@ namespace scara
 			if (m_hit_target)
 			{
 				// Hit the target point after the robot has stabilized.. To allow certain time, we use ros::Timer
-				m_ROS_Logistics->reset_timer();		// start one-shot timer once target is locked
-				m_hit_target = false;				// don't trigger till this flag is reset by timer callback
+				m_ROS_Logistics->reset_timer(5);		// start one-shot timer once target is locked.. stablizing wait time is 3 seconds
+				m_hit_target = false;					// don't trigger till this flag is reset by timer callback
 			}
 		}
 	}

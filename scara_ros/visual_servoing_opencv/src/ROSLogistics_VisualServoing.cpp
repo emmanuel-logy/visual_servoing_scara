@@ -31,8 +31,8 @@ namespace scara
 
 
 		// Subscribe to a timer to wait till scara stablizes and then hit the target and retract
-		m_stablize_wait_time = 5;	// 5 seconds
-		m_stablize_wait_timer = m_node->createTimer(ros::Duration(m_stablize_wait_time),
+		double stablize_wait_time = 0;	// initializing
+		m_stablize_wait_timer = m_node->createTimer(ros::Duration(stablize_wait_time),
 												    &ROSLogistics_VisualServoing::callback_timer, this,
 												    true);	// true == one-shot timer
 		m_stablize_wait_timer.stop();	// Don't need now.. once stablized, we'll trigger later
@@ -98,10 +98,10 @@ namespace scara
 	}
 
 
-	void ROSLogistics_VisualServoing::reset_timer()
+	void ROSLogistics_VisualServoing::reset_timer(const double& time_period)
 	{
 		m_stablize_wait_timer.stop();
-		m_stablize_wait_timer.setPeriod(ros::Duration(m_stablize_wait_time));
+		m_stablize_wait_timer.setPeriod(ros::Duration(time_period));
 		m_stablize_wait_timer.start();
 	}
 

@@ -3,12 +3,12 @@
 
   <!-- Box Object -->
   <gazebo reference="obj_box">
-    <material>Gazebo/Orange</material>
+    <material>Gazebo/FlatBlack</material>
   </gazebo>
 
   <!-- box_cylinders -->
   <gazebo reference="obj_cylinder1">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/RedGlow</material>
   </gazebo>
 
   <gazebo reference="obj_cylinder2">

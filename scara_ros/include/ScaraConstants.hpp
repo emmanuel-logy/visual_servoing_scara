@@ -20,11 +20,7 @@ namespace scara
 
     // Some helpful ros constants
     constexpr uint32_t queue_size = 1;
-<<<<<<< HEAD
     constexpr double spin_rate = 100.0;		// Keep processing callback queue at 10 Hz = 1/10 sec = 100ms
-=======
-    constexpr double spin_rate = 10.0;		// Keep processing callback queue at 10 Hz = 1/10 sec = 100ms
->>>>>>> ea81a5977bfdfcb812a2a96024af55bb17b151fd
 
 
     // Some global ros topics used throughout
