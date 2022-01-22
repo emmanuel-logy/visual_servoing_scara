@@ -1,0 +1,2 @@
+The rosbag used for recording the demo is around 500MB. 
+Hence, it couldn't be uploaded to Github as it has limit of 100 MB max for a given file.
