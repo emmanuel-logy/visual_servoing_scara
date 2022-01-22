@@ -28,6 +28,57 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 
+
+
+---
+### Deployment Diagram using UML
+Deployment diagrams are a useful tool to get the BIG PICTURE of how the nodes are running and interacting with each other, especially in a multiple process environment like this one. 
+
+The boxes highlighted in the <span style="color:blue">blue</span> are the nodes written by me. The phrases represented in the <span style="color:blue">blue</span> font are the topics and services being provided by the nodes developed by me. 
+
+<p float="left">
+  <img src="media/Deployment_Diagram.png" height="480" width="896" />
+</p>
+
+> *As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.*
+
+
+
+
+
+---
+### High Level Design
+The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.
+<p float="left">
+  <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
+</p>
+
+
+
+
+
+
+---
+### Tools and Frameworks
+**ROS Version:** Noetic
+
+**Gazebo Version:** 11.9.1
+
+**IDE:** Eclipse <br>
+*(The required setup was made to use catkin_make to build the roscpp codebase. The necessary environemnt variables were setup to debug them on the fly)*
+
+**3rd party libraries:**
+- OpenCV 4.2
+- Eigen 3.4.0
+
+**Software Modelling Tool:** Star UML <br>
+*(The deployment diagram that describes the modular design of the code and how the different nodes interact with each other was created using this software)*
+
+
+
+
+
+
 ---
 ## <u>Work done behind the scenes</u>:
  
@@ -75,47 +126,6 @@ Another XACRO file was written to preserve the modularity of xacro files.
         This file was written from scratch to bring up the necessary nodes and load the necessary parameters.
 
 
----
-### Tools and Frameworks
-**ROS Version:** Noetic
-
-**Gazebo Version:** 11.9.1
-
-**IDE:** Eclipse <br>
-*(The required setup was made to use catkin_make to build the roscpp codebase. The necessary environemnt variables were setup to debug them on the fly)*
-
-**3rd party libraries:**
-- OpenCV 4.2
-- Eigen 3.4.0
-
-**Software Modelling Tool:** Star UML <br>
-*(The deployment diagram that describes the modular design of the code and how the different nodes interact with each other was created using this software)*
-
-
-
-
----
-### Deployment Diagram using UML
-Deployment diagrams are a useful tool to get the BIG PICTURE of how the nodes are running and interacting with each other, especially in a multiple process environment like this one. 
-
-The boxes highlighted in the <span style="color:blue">blue</span> are the nodes written by me. The phrases represented in the <span style="color:blue">blue</span> font are the topics and services being provided by the nodes developed by me. 
-
-<p float="left">
-  <img src="media/Deployment_Diagram.png" height="480" width="896" />
-</p>
-
-> *As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.*
-
-
-
-
-
----
-### High Level Design
-The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.
-<p float="left">
-  <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
-</p>
 
 
 
