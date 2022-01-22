@@ -11,7 +11,7 @@ bool scara_ik_srv(scara_gazebo::scara_ik::Request& req,
     double axel_offset = 0.05;
     double L1 = 0.5;
     double L2 = 0.25;
-    double L3 = 0.35 - axel_offset;
+    double L3 = 0.35;
     double L4 = 0.25;
 
     // Goal pose of the end effector

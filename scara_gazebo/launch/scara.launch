@@ -1,21 +1,113 @@
 <launch>
+	
+	<!-- ################################################################################################################# -->
+	<!-- Loading the empty world on gazebo. We can add whatever model later or 
+		 use the existing gazebo models from osrf online database using the <uri> tag in the .world file -->
+		 
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	    <arg name="paused" value="true"/>
+	    <arg name="use_sim_time" value="true"/>
+	    <arg name="gui" value="true"/>
+	    <arg name="headless" value="false"/> 		<!-- Inert - see gazebo_ros_pkgs issue #491 -->
+	    <arg name="recording" value="false"/>
+	    <arg name="debug" value="false"/>
+	    <arg name="world_name" value="$(find scara_gazebo)/scara_gazebo/worlds/scara_pbvs.world"/>
+	</include>
+	
+	
+	<!-- ################################################################################################################# -->
+	<!-- Load the robot_description on the ROS param server using xacro to generate the model description 
+		 The param name, "robot_description" shouldn't be changed because joint_state_publisher looks for 
+		 a parameter with this specific name later when start that node as well -->
+		 
+	<arg name="model_path" default="$(find scara_gazebo)/scara_description/urdf/scara.xacro"/>
+	<arg name="params_path" default="$(find scara_gazebo)/scara_description/urdf/scara_config.yaml"/>
+	<rosparam file="$(find scara_gazebo)/scara_description/urdf/scara_config.yaml" command="load"/>
+	<param name="robot_description" command="$(find xacro)/xacro $(arg model_path) robot_config_path:=$(arg params_path) " />
+	
+	<node 	name="urdf_spawner_robot" 
+			pkg="gazebo_ros" 
+			type="spawn_model" 	
+			respawn="false" 
+			output="screen"
+		  	args="-urdf -model scara -param robot_description -x 0 -y 0 -z 0"/>
+		  	
+  	<!-- name = name of the node with which it registers with ROS Master
+  		 pkg = package in which the node resides
+  		 type = name of the binary file for this node we specify in the CMake file
+  		 output = any ROS_INFO or couts in this node should be shown on the screen, else it goes to log files in ./ros -->
+	
+	<!-- ################################################################################################################# -->
+    <!-- Spawn the object into Gazebo -->
+   	<arg name="object_model_path" default="$(find scara_gazebo)/scara_description/urdf/object.xacro"/>
+	<param name="object_description" command="$(find xacro)/xacro $(arg object_model_path)" />
+   	
+    <node 	name="urdf_spawner_object" 
+    		pkg="gazebo_ros" 
+    		type="spawn_model" 
+			respawn="false" 
+			output="screen"
+		  	args="-urdf -model object -param object_description -x 0.7 -y 0 -z 1.1"/>
+		  			
+	<!-- ################################################################################################################# -->
+	
+	<!-- Using gazebo APIs publish joint states 
+		 It will be useful for computing FK ourselves and 
+		 can be used by other packages like robot_state_publisher to compute tf matrices or poses for moving joints -->
+	<node 	name="joint_state_publisher" 
+			pkg="joint_state_publisher" 
+			type="joint_state_publisher" 
+			output="screen"/>
+	 
+ 	<!-- convert joint states to TF transforms for rviz, etc -->
+	<node 	name="robot_state_publisher" 
+			pkg="robot_state_publisher" 
+			type="robot_state_publisher" 
+			respawn="false" 
+			output="screen">
+			<remap from="/joint_states" to="/scara/joint_states" />
+			<param name="publish_frequency" value="10" />				<!-- 5hz = 200ms -->
+	</node>
+	
+	<!-- ################################################################################################################# -->
+	<!-- Load joint controller configurations from YAML file to parameter server -->
+	<rosparam file="$(find scara_gazebo)/scara_controller/config/scara_control.yaml" command="load"/>
+	
+	<!-- load the controllers for Position control-->
+	<node 	name="controller_spawner" 
+			pkg="controller_manager" 
+			type="spawner" 
+			respawn="false"
+			output="screen" 
+			ns="/scara" 
+			args="joint_state_controller all_joints_velocity_controller" />
+		<!--args="joint_state_controller joint1_position_controller joint2_position_controller joint3_position_controller" /> -->
+		<!--Use above args for loading separate controllers for each joint -->
+			
+  	<!-- Basically the controller_spawner node 
+  		 1. parses the type of controllers associated with these args...
+  		 	the mapping we gave in the scara_control.yaml file which got loaded to param server in parameter "robot_description"
+  		 2. loads those interfaces/objects in the controller_spawner code 
+  		 	to process the /joint_states being published by the joint_state_controller whose pub_rate is set in the yaml file -->		
+	
+	<!-- load the controllers for Velocity control-->
+	<!-- node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	 output="screen" ns="/scara" args="joint_state_controller joint1_velocity_controller joint2_velocity_controller joint3_velocity_controller"/-->
 
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="paused" value="true"/>
-        <arg name="use_sim_time" value="true"/>
-        <arg name="gui" value="true"/>
-        <arg name="headless" value="false"/> 		<!-- Inert - see gazebo_ros_pkgs issue #491 -->
-        <arg name="recording" value="false"/>
-        <arg name="debug" value="false"/>
-    </include>
 
-    <!-- Spawn a robot into Gazebo -->
-    <param  name="robot_description" command="$(find xacro)/xacro $(find scara_gazebo)/scara_description/urdf/scara.xacro"/>
-    <node   name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-            args="-urdf -model scara
-                  -param robot_description
-                  -x 0 -y 0 -z 0"/>
-
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
+	<!-- ################################################################################################################# -->
+	<!-- Load our kinematics node -->
+	<node 	name="scara_kinematics_node" 
+			pkg="scara_gazebo" 
+			type="scara_kinematics" 
+			output="screen" /> 
+	
+	<!-- ################################################################################################################# -->
+	<!-- Load our visual servoing node -->
+	<node 	name="scara_visual_servoing_node" 
+			pkg="scara_gazebo" 
+			type="visual_servoing" 
+			output="screen" /> 
+	<!-- ################################################################################################################# -->
 
 </launch>

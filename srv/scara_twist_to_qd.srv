@@ -1,0 +1,5 @@
+geometry_msgs/Twist in_twist
+---
+float64 out_qd1
+float64 out_qd2
+float64 out_qd3

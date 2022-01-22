@@ -3,11 +3,9 @@
 
     <name>scara_gazebo</name>
     <version>0.0.0</version>
-    <description>The RBE500 Group Assignment Scara package</description>
+    <description>The RBE500 Assignment Scara package</description>
     <url type="website">git</url>
     <maintainer email="ejayaraju@wpi.edu">emmanuel</maintainer>
-    <maintainer email="fenil@wpi.edu">fenil</maintainer>
-    <maintainer email="krutarth@wpi.edu">krutarth</maintainer>
     <author email="ejayaraju@wpi.edu">Emmanuel</author>
     <license>TODO</license>
 
@@ -17,7 +15,17 @@
     <depend>std_msgs</depend>
     <depend>sensor_msgs</depend>
     <depend>geometry_msgs</depend>
+    <depend>tf2_ros</depend>
+    <!-- Following 3 dependecies to write our own controller -->
+    <depend>controller_interface</depend>
+    <depend>hardware_interface</depend>
+    <depend>pluginlib</depend>
+    
     <build_depend>message_generation</build_depend>
     <exec_depend>message_runtime</exec_depend>
+    
+    <export>
+    	<controller_interface plugin="${prefix}/scara_gazebo/plugins/controller_plugins.xml" />
+    </export>
 
 </package>

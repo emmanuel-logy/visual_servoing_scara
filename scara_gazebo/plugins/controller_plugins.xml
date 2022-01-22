@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<library path="lib/libmy_velocity_controller">
+	<class 	name="scara_gazebo/MyVelocityController"
+			type="scara::MyVelocityController"
+			base_class_type="controller_interface::ControllerBase" />
+</library>

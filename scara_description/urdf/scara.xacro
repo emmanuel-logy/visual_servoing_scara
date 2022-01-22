@@ -1,15 +1,24 @@
 <?xml version="1.0"?>
-<!-- RRP Manipulator -->
+<!-- Scara Manipulator -->
 <robot name="scara" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- Read in the yaml dict as mp (short for model parameters) -->
+  <xacro:property name="params_path" value="$(arg robot_config_path)"/>
+  <xacro:property name="robot_config" value="${xacro.load_yaml(params_path)}"/>
+
   <!-- Constants for robot dimensions -->
-  <xacro:property name="mass" value="0.2" /> <!-- arbitrary value for mass -->
-  <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
-  <xacro:property name="height1" value="0.5" /> <!-- Link 1 -->
-  <xacro:property name="height1_offset" value="0.25" /> <!-- Link 1 -->
-  <xacro:property name="height2" value="0.35" /> <!-- Link 2 -->
-  <xacro:property name="height3" value="0.25" /> <!-- Link 3 -->
-  <xacro:property name="axel_offset" value="${width/2}" /> <!-- Space btw top of beam and the each joint -->
+  <xacro:property name="m1" value="${robot_config['scara']['link_masses']['m1']}" />    <!-- arbitrary value for mass -->
+  <xacro:property name="m2" value="${robot_config['scara']['link_masses']['m2']}" />    <!-- arbitrary value for mass -->
+  <xacro:property name="m2" value="${robot_config['scara']['link_masses']['m3']}" />    <!-- arbitrary value for mass -->
+  <xacro:property name="m3" value="${robot_config['scara']['link_masses']['m4']}" />    <!-- arbitrary value for mass -->
+  <xacro:property name="W" value="${robot_config['scara']['link_width']}" />            <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="L1" value="${robot_config['scara']['link_lengths']['L1']}" />   <!-- arbitrary value -->
+  <xacro:property name="L2" value="${robot_config['scara']['link_lengths']['L2']}" />   <!-- arbitrary value -->
+  <xacro:property name="L3" value="${robot_config['scara']['link_lengths']['L3']}" />   <!-- arbitrary value -->
+  <xacro:property name="L4" value="${robot_config['scara']['link_lengths']['L4']}" />   <!-- arbitrary value -->
+  <xacro:property name="axel_offset" value="${W/2}" />                                  <!-- Space btw top of beam and the each joint -->
+  <xacro:property name="camera_box_size" value="${W/2}" /> 									<!-- Size of square 'camera' box -->
+  
 
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
   <xacro:include filename="$(find scara_gazebo)/scara_description/urdf/scara.gazebo" />
@@ -32,61 +41,61 @@
   <!-- Base Link -->
   <link name="link1">
     <collision>
-      <origin xyz="0 0 ${height1/2}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${L1/2}" rpy="0 0 0"/>
       <geometry>
-          <box size="${width} ${width} ${height1}"/>
+          <box size="${W} ${W} ${L1}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 0 ${height1/2}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${L1/2}" rpy="0 0 0"/>
       <geometry>
-          <box size="${width} ${width} ${height1}"/>
+          <box size="${W} ${W} ${L1}"/>
       </geometry>
       <material name="orange"/>
     </visual>
 
     <inertial>
-      <origin xyz="0 0 ${height1/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <origin xyz="0 0 ${L1/2}" rpy="0 0 0"/>
+      <mass value="${m1}"/>
       <inertia
-    	  ixx="1.0" ixy="0.0" ixz="0.0"
-          iyx="0.0" iyy="1.0" iyz="0.0"
-          izx="0.0" izy="0.0" izz="1.0"/>
+    	  ixx="${(m1 / 12.0) * (W*W + L1*L1)}" ixy="0.0" ixz="0.0"
+          iyx="0.0" iyy="${(m1 / 12.0) * (W*W + L1*L1)}" iyz="0.0"
+          izx="0.0" izy="0.0" izz="${(m1 / 12.0) * (W*W + W*W)}"/>
     </inertial>
   </link>
 
-  <!-- For offset link -->
+  <!-- For offset link to avoid singularity condition -->
   <joint name="joint1_offset" type="fixed">
     <parent link="link1"/>
     <child link="link1_offset"/>
-    <origin xyz="0 0 ${height1 + axel_offset}" rpy="0 0 0"/>
+    <origin xyz="0 0 ${L1 + axel_offset}" rpy="0 0 0"/>
   </joint>
 
   <!-- Offset Link -->
   <link name="link1_offset">
     <collision>
-      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <origin xyz="${L2/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
       <geometry>
-          <box size="${width} ${width} ${height1_offset}"/>
+          <box size="${W} ${W} ${L2}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <origin xyz="${L2/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
       <geometry>
-          <box size="${width} ${width} ${height1_offset}"/>
+          <box size="${W} ${W} ${L2}"/>
       </geometry>
       <material name="orange"/>
     </visual>
 
     <inertial>
-      <origin xyz="0 ${height1_offset/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
-      <mass value="${mass}"/>
+      <origin xyz="${L2/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
+      <mass value="${m2}"/>
       <inertia
-          ixx="1.0" ixy="0.0" ixz="0.0"
-          iyx="0.0" iyy="1.0" iyz="0.0"
-          izx="1.0" izy="0.0" izz="1.0"/>
+    	  ixx="${(m2 / 12.0) * (W*W + L2*L2)}" ixy="0.0" ixz="0.0"
+          iyx="0.0" iyy="${(m2 / 12.0) * (W*W + L2*L2)}" iyz="0.0"
+          izx="0.0" izy="0.0" izz="${(m2 / 12.0) * (W*W + W*W)}"/>
     </inertial>
   </link>
 
@@ -94,7 +103,7 @@
   <joint name="joint2" type="revolute">
     <parent link="link1_offset"/>
     <child link="link2"/>
-    <origin xyz="0 ${height1_offset/2 - axel_offset} ${axel_offset*2}" rpy="0 0 0"/>
+    <origin xyz="${L2 - 2*axel_offset} 0 ${axel_offset*2}" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="30" velocity="1.0" lower="-${pi/2}" upper="${pi/2}" />
     <dynamics damping="0.7"/>
@@ -103,27 +112,27 @@
   <!-- Middle Link -->
   <link name="link2">
     <collision>
-      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <origin xyz="${L3/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
       <geometry>
-          <box size="${width} ${width} ${height2}"/>
+          <box size="${W} ${W} ${L3}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
+      <origin xyz="${L3/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
       <geometry>
-          <box size="${width} ${width} ${height2}"/>
+          <box size="${W} ${W} ${L3}"/>
       </geometry>
       <material name="orange"/>
     </visual>
 
     <inertial>
-      <origin xyz="0 ${height1_offset/2 + height2/2 - axel_offset} 0" rpy="${-pi/2} 0 0"/>
-      <mass value="${mass}"/>
+      <origin xyz="${L3/2 - axel_offset} 0 0" rpy="0 ${pi/2} 0"/>
+      <mass value="${m2}"/>
       <inertia
-          ixx="1.0" ixy="0.0" ixz="0.0"
-          iyx="0.0" iyy="1.0" iyz="0.0"
-          izx="1.0" izy="0.0" izz="1.0"/>
+    	  ixx="${(m2 / 12.0) * (W*W + L3*L3)}" ixy="0.0" ixz="0.0"
+          iyx="0.0" iyy="${(m2 / 12.0) * (W*W + L3*L3)}" iyz="0.0"
+          izx="0.0" izy="0.0" izz="${(m2 / 12.0) * (W*W + W*W)}"/>
     </inertial>
   </link>
 
@@ -131,10 +140,9 @@
   <joint name="joint3" type="prismatic">
     <parent link="link2"/>
     <child link="link3"/>
-    <origin xyz="0 ${height2 + axel_offset/2} 0" rpy="${pi} 0 0"/>
+    <origin xyz="${L3} 0 0" rpy="0 ${pi} 0"/>
     <!-- Limits are from the link origin and not the joint origins -->
-    <!-- limit effort="30" velocity="1.0" upper="${-height3/2 + axel_offset}" lower="${height3 - 2*axel_offset}" /-->
-    <limit effort="30" velocity="1.0" lower="0" upper="${-height3/2 + axel_offset}"/>
+    <limit effort="100" velocity="10.0" upper="${L4}" lower="0" />
     <axis xyz="0 0 1"/>
     <dynamics damping="0.7"/>
   </joint>
@@ -142,40 +150,91 @@
   <!-- Final Link -->
   <link name="link3">
     <collision>
-      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${-L4/2 - axel_offset}" rpy="0 0 0"/>
       <geometry>
-          <box size="${width} ${width} ${height3}"/>
+          <box size="${W} ${W} ${L4}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${-L4/2 - axel_offset}" rpy="0 0 0"/>
       <geometry>
-          <box size="${width} ${width} ${height3}"/>
+          <box size="${W} ${W} ${L4}"/>
       </geometry>
       <material name="orange"/>
     </visual>
 
     <inertial>
-      <origin xyz="0 0 ${-height3/2 + axel_offset}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <origin xyz="0 0 ${-L4/2 - axel_offset}" rpy="0 0 0"/>
+      <mass value="${m3}"/>
       <inertia
-          ixx="1.0" ixy="0.0" ixz="0.0"
-          iyx="0.0" iyy="1.0" iyz="0.0"
-          izx="1.0" izy="0.0" izz="1.0"/>
+    	  ixx="${(m3 / 12.0) * (W*W + L4*L4)}" ixy="0.0" ixz="0.0"
+          iyx="0.0" iyy="${(m3 / 12.0) * (W*W + L4*L4)}" iyz="0.0"
+          izx="0.0" izy="0.0" izz="${(m3 / 12.0) * (W*W + W*W)}"/>
     </inertial>
   </link>
+  
+  
+	<!-- Attaching a camera to the end effector -->
+ 	<joint name="camera_joint" type="fixed">
+		  <origin xyz="0 0 0" rpy="0 ${-pi/2} 0 "/>
+		  <parent link="link3"/>
+		  <child link="camera_link"/>
+	</joint>
+
+  <!-- Camera -->
+  <link name="camera_link">
+    <collision>
+      <origin xyz="${-axel_offset} 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="${camera_box_size} ${camera_box_size} ${camera_box_size}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="${-axel_offset} 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="${camera_box_size} ${camera_box_size} ${camera_box_size}"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="${-axel_offset} 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <!-- generate an optical frame http://www.ros.org/reps/rep-0103.html#suffix-frames
+       so that ros and opencv can operate on the camera frame correctly -->
+  <joint name="camera_optical_joint" type="fixed">
+		<!-- these values have to be these values otherwise the gazebo camera image
+			 won't be aligned properly with the frame it is supposedly originating from -->
+		<origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+		<parent link="camera_link"/>
+		<child link="camera_link_optical"/>
+  </joint>
+
+  <link name="camera_link_optical" />  
+  
+  
 
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <!-- 	i.e output is always velocity and input is position.. 
+      		i.e joints velocity is computed based on goal position and further rpm voltages are computed based on velocity --> 
+      <!-- if we want to use effort output to control the joints based on position inputs, use the below tag -->
+      <!--hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface-->	
     </joint>
     <actuator name="motor1">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
 
   <transmission name="tran2">
     <type>transmission_interface/SimpleTransmission</type>
