@@ -37,8 +37,9 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ## Deployment Diagram using UML
 <figure>
     <img src="media/Deployment_Diagram.png" height="480" width="896" />
-    <figcaption><i>As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
+    <figcaption><i>The communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
 </figure>
+<br>
 
 Deployment diagrams are a useful tool to get the BIG PICTURE of how the nodes are running and interacting with each other, especially in a multiple process environment like this one. 
 
