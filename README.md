@@ -48,7 +48,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 ---
 ### High Level Design
 <figure>
-    <img src="media/Logic_BlockDiagram.png" height="420" width="784" />
+    <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
     <figcaption><i>The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.</i></figcaption>
 </figure>
 
