@@ -22,7 +22,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 *Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 
 
-<br>
+
 ##### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!  
 <figure>
     <img src="media/demo3_plots.gif" height="360" width="672" />
@@ -90,7 +90,7 @@ The XACRO file for simulating the robot in Gazebo physics simulator was written 
 Another XACRO file was written to preserve the modularity of xacro files.
 <br><br>
 
-- **ROS Nodes**: <br> <br>
+- **ROS Nodes**: <br>
 
     - **Scara Kinematics**: 
        - <u>*Forward Kinematics*</u>: <br>
@@ -114,13 +114,13 @@ Another XACRO file was written to preserve the modularity of xacro files.
        - *Possible future work*
 
 
-- **ROS Plugins**: <br> <br>
+- **ROS Plugins**: <br> 
 
     - **My Velocity Controller**:   
         The interface for the gazebo_ros controller was inheirited to write my <u>own PID controller</u>. The PID values are loaded from the ROS param server. For the integrator part of the controller, an anti-wind up logic was also realized.
 
 
-- **Gazebo Launch File**: <br> <br>
+- **Gazebo Launch File**: <br>
 
     - **scara.launch**:   
         This file was written from scratch to bring up the necessary nodes and load the necessary parameters.
