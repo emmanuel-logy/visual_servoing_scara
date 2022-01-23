@@ -39,13 +39,17 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ## Deployment Diagram using UML
 <figure>
     <img src="media/Deployment_Diagram.png" height="480" width="896" />
-    <figcaption><i>The communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
 </figure>
 <br>
 
+> :information_source: The communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services. <br>
+> The boxes highlighted in the <span style="color:blue">blue</span> are the nodes written by me. The phrases represented in the <span style="color:blue">blue</span> font are the topics and services being provided by the nodes developed by me. 
+
+
+
+> :question: **Why is this useful?** <br>
 Deployment diagrams are a useful tool to get the BIG PICTURE of how the nodes are running and interacting with each other, especially in a multiple process environment like this one. 
 
-The boxes highlighted in the <span style="color:blue">blue</span> are the nodes written by me. The phrases represented in the <span style="color:blue">blue</span> font are the topics and services being provided by the nodes developed by me. 
 
 
 
@@ -55,9 +59,9 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 ## High Level Design
 <figure>
     <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
-    <figcaption><i>The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.</i></figcaption>
 </figure>
 
+> :information_source: The following block diagram gives a quick overview of the logic employed to perform the Visual Servoing.
 
 
 
