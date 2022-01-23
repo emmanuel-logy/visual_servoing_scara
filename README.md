@@ -1,5 +1,5 @@
 # Visual Servoing - SCARA Robot
----
+
 ## Overview
 In this project, I have implemented **Position Based Visual Servoing (PBVS)** for the well-known **SCARA** robot. 
 
