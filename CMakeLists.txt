@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(scara_gazebo)
+project(visual_servoing_scara)
 
 add_compile_options(-std=c++14)
 set(CMAKE_BUILD_TYPE "Debug")		# change it to "Release" when needed
@@ -58,7 +58,7 @@ generate_messages(
 
 catkin_package(
     INCLUDE_DIRS scara_ros/include
-    LIBRARIES scara_gazebo
+    LIBRARIES visual_servoing_scara
     CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs geometry_msgs message_runtime 
     DEPENDS
 )
@@ -95,7 +95,7 @@ set(SOURCES_KINEMATICS
 		scara_ros/kinematics/src/ScaraKinematics.cpp	
 )
 add_executable(scara_kinematics ${SOURCES_KINEMATICS})
-add_dependencies(scara_kinematics scara_gazebo_generate_messages_cpp)
+add_dependencies(scara_kinematics visual_servoing_scara_generate_messages_cpp)
 target_link_libraries(scara_kinematics ${catkin_LIBRARIES} common_utils)
 
 

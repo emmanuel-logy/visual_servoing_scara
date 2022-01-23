@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "scara_gazebo", ros::init_options::AnonymousName);
+	ros::init(argc, argv, "visual_servoing_scara", ros::init_options::AnonymousName);
 
 
 	/* When the robot Kinematics is changed, just change the object name here and

@@ -21,9 +21,9 @@
   
 
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find scara_gazebo)/scara_description/urdf/scara.gazebo" />
+  <xacro:include filename="$(find visual_servoing_scara)/scara_description/urdf/scara.gazebo" />
   <!-- Import Rviz colors -->
-  <xacro:include filename="$(find scara_gazebo)/scara_description/urdf/materials.xacro" />
+  <xacro:include filename="$(find visual_servoing_scara)/scara_description/urdf/materials.xacro" />
 
   <!-- Used for fixing robot to Gazebo 'base_link' -->
   <link name="world"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
 
-    <name>scara_gazebo</name>
+    <name>visual_servoing_scara</name>
     <version>0.0.0</version>
     <description>The RBE500 Assignment Scara package</description>
     <url type="website">git</url>

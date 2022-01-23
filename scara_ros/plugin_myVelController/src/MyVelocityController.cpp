@@ -68,8 +68,10 @@ namespace scara
 
 			// [3] Generate Integral control signal
 			// Mul with 0.1 to limit the contribution from Integrator control signal part because final control signal is combo of P+I+D
-			double iMax = 0.1 * (actuator_DAC_range)/m_joint_PID_Gains[i].Ki;
-			double iMin = -0.1 * (actuator_DAC_range)/m_joint_PID_Gains[i].Ki;
+//			double iMax = 0.1 * (actuator_DAC_range)/m_joint_PID_Gains[i].Ki;
+//			double iMin = -0.1 * (actuator_DAC_range)/m_joint_PID_Gains[i].Ki;
+			double iMax = 0.1 * (actuator_DAC_range);
+			double iMin = -0.1 * (actuator_DAC_range);
 
 			m_iErrSum = m_iErrSum + error + m_iErrAccumulator.front();
 			m_iErrAccumulator.pop_front();								// throw away oldest error within the sampling size batch
@@ -97,7 +99,7 @@ namespace scara
 	}
 
 
-	void MyVelocityController::set_cmd_cb(const scara_gazebo::Float64Array::ConstPtr& msg)
+	void MyVelocityController::set_cmd_cb(const visual_servoing_scara::Float64Array::ConstPtr& msg)
 	{
 		m_joint_cmds = msg->data;
 

@@ -7,13 +7,13 @@
 
 #include "ScaraConstants.hpp"
 #include "ScaraKinematics.hpp"
-#include "scara_gazebo/scara_ik.h"
-#include "scara_gazebo/scara_fk.h"
-#include "scara_gazebo/scara_vel_control.h"
+#include "visual_servoing_scara/scara_ik.h"
+#include "visual_servoing_scara/scara_fk.h"
+#include "visual_servoing_scara/scara_vel_control.h"
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
-//#include "scara_gazebo/scara_qd_to_twist.h"
-//#include "scara_gazebo/scara_twist_to_qd.h"
+//#include "visual_servoing_scara/scara_qd_to_twist.h"
+//#include "visual_servoing_scara/scara_twist_to_qd.h"
 #include <memory>
 
 
@@ -31,16 +31,16 @@ namespace scara
 		// Publishing this continuously to record it using rosbag and analyze end effector movements
 		void pub_scara_pose(const std::vector<double>& q);
 
-		bool srv_scara_fk(scara_gazebo::scara_fk::Request& req,
-		                  scara_gazebo::scara_fk::Response& res);
+		bool srv_scara_fk(visual_servoing_scara::scara_fk::Request& req,
+		                  visual_servoing_scara::scara_fk::Response& res);
 
 
-		bool srv_scara_ik(scara_gazebo::scara_ik::Request& req,
-		                  scara_gazebo::scara_ik::Response& res);
+		bool srv_scara_ik(visual_servoing_scara::scara_ik::Request& req,
+		                  visual_servoing_scara::scara_ik::Response& res);
 
 
-		bool srv_vel_control(scara_gazebo::scara_vel_control::Request& req,
-							 scara_gazebo::scara_vel_control::Response& res);
+		bool srv_vel_control(visual_servoing_scara::scara_vel_control::Request& req,
+							 visual_servoing_scara::scara_vel_control::Response& res);
 
 	private:
         std::shared_ptr<ros::NodeHandle> m_node;	// ptr cuz we shouldn't create it before calling ros::init
@@ -69,8 +69,8 @@ namespace scara
 
 
 
-//bool srv_qd_to_twist(scara_gazebo::scara_qd_to_twist::Request  &req,
-//                     scara_gazebo::scara_qd_to_twist::Response &res)
+//bool srv_qd_to_twist(visual_servoing_scara::scara_qd_to_twist::Request  &req,
+//                     visual_servoing_scara::scara_qd_to_twist::Response &res)
 //{
 //    Eigen::Matrix<float,3,1> qd = Eigen::Matrix<float,3,1>::Zero();
 //    qd[0] = req.in_qd.velocity[0];
@@ -91,8 +91,8 @@ namespace scara
 //    return true;
 //}
 //
-//bool srv_twist_to_qd(scara_gazebo::scara_twist_to_qd::Request  &req,
-//                     scara_gazebo::scara_twist_to_qd::Response &res)
+//bool srv_twist_to_qd(visual_servoing_scara::scara_twist_to_qd::Request  &req,
+//                     visual_servoing_scara::scara_twist_to_qd::Response &res)
 //{
 //    Eigen::Matrix<float,6,1> twist = Eigen::Matrix<float,6,1>::Zero();
 //    twist[0] = req.in_twist.linear.x;

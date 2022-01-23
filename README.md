@@ -151,7 +151,7 @@ To build from source, clone the latest version from this repository into your ca
 
 * **STEP 2**: Launch the SCARA with the nodes necessary for performing the PBVS
 	
-	$ roslaunch scara_gazebo scara.launch
+	$ roslaunch visual_servoing_scara scara.launch
 
 * **[Optional 1]**:
 

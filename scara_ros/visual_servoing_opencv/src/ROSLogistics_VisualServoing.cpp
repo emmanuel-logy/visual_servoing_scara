@@ -4,11 +4,11 @@
 #include "ROSLogistics_VisualServoing.hpp"
 #include "ScaraConstants.hpp"
 #include "ScaraKinematics.hpp"
-#include "scara_gazebo/Float64Array.h"
+#include "visual_servoing_scara/Float64Array.h"
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
-//#include "scara_gazebo/scara_qd_to_twist.h"
-//#include "scara_gazebo/scara_twist_to_qd.h"
+//#include "visual_servoing_scara/scara_qd_to_twist.h"
+//#include "visual_servoing_scara/scara_twist_to_qd.h"
 
 
 namespace scara
@@ -126,7 +126,7 @@ namespace scara
 	{
 		if (m_client_FK)
 		{
-			scara_gazebo::scara_fk srv;
+			visual_servoing_scara::scara_fk srv;
 			srv.request.q = q;
 			if ( !m_client_FK.call(srv) )
 			{
@@ -145,7 +145,7 @@ namespace scara
 	{
 		if (m_client_IK)
 		{
-			scara_gazebo::scara_ik srv;
+			visual_servoing_scara::scara_ik srv;
 			Utils::eigenPose_to_rosPose(pose, srv.request.goal_pose);
 			if ( !m_client_IK.call(srv) )
 			{
@@ -164,7 +164,7 @@ namespace scara
 	{
 		if (m_client_VelControl)
 		{
-			scara_gazebo::scara_vel_control srv;
+			visual_servoing_scara::scara_vel_control srv;
 			srv.request.q = q;
 			if ( !m_client_VelControl.call(srv) )
 			{
@@ -184,9 +184,9 @@ namespace scara
 		m_sub_jointStates = m_node->subscribe(topic_joint_states, queue_size, &ROSLogistics_VisualServoing::callback_joint_states, this);
 
 		// Setup the necessary ROS services for computing FK, IK and VEL_CNTRL to perform visual servoing
-		m_client_FK 		= m_node->serviceClient<scara_gazebo::scara_fk>(srv_scara_fk_name, true);					// 2nd arg true==>persistent connection
-		m_client_IK 		= m_node->serviceClient<scara_gazebo::scara_ik>(srv_scara_ik_name, true);					// 2nd arg true==>persistent connection
-		m_client_VelControl = m_node->serviceClient<scara_gazebo::scara_vel_control>(srv_scara_vel_control_name, true);	// 2nd arg true==>persistent connection
+		m_client_FK 		= m_node->serviceClient<visual_servoing_scara::scara_fk>(srv_scara_fk_name, true);					// 2nd arg true==>persistent connection
+		m_client_IK 		= m_node->serviceClient<visual_servoing_scara::scara_ik>(srv_scara_ik_name, true);					// 2nd arg true==>persistent connection
+		m_client_VelControl = m_node->serviceClient<visual_servoing_scara::scara_vel_control>(srv_scara_vel_control_name, true);	// 2nd arg true==>persistent connection
 
 
 		// Setup the necessary ROS subscriptions to listen to raw_image and camera info

@@ -6,7 +6,7 @@
 #define MY_VELOCITY_CONTROLLER_DEFINES_HPP
 
 #include "ScaraConstants.hpp"
-#include "scara_gazebo/Float64Array.h"
+#include "visual_servoing_scara/Float64Array.h"
 #include <controller_interface/controller.h>
 #include <hardware_interface/joint_command_interface.h>
 #include <pluginlib/class_list_macros.h>
@@ -52,7 +52,7 @@ namespace scara
 		 * 		Basically, some main code like visual servoing tells the velocity input to be applied
 		 * 		Or some IK srv tells the goal position to go and this node calculates the velocity to reach there ASAP smoothly
 		 */
-		void set_cmd_cb(const scara_gazebo::Float64Array::ConstPtr& msg);
+		void set_cmd_cb(const visual_servoing_scara::Float64Array::ConstPtr& msg);
 
 
 

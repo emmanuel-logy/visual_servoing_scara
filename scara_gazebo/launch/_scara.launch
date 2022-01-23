@@ -10,7 +10,7 @@
     </include>
 
     <!-- Spawn a robot into Gazebo -->
-    <param  name="robot_description" command="$(find xacro)/xacro $(find scara_gazebo)/scara_description/urdf/scara.xacro"/>
+    <param  name="robot_description" command="$(find xacro)/xacro $(find visual_servoing_scara)/scara_description/urdf/scara.xacro"/>
     <node   name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
             args="-urdf -model scara
                   -param robot_description
@@ -19,7 +19,7 @@
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
     
    <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find scara_gazebo)/scara_controller/config/scara_control.yaml" command="load"/>
+  <rosparam file="$(find visual_servoing_scara)/scara_controller/config/scara_control.yaml" command="load"/>
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"

@@ -8,9 +8,9 @@
 #include "Utils.hpp"
 #include "ScaraConstants.hpp"
 #include "VisualServoing.hpp"
-#include "scara_gazebo/scara_ik.h"
-#include "scara_gazebo/scara_fk.h"
-#include "scara_gazebo/scara_vel_control.h"
+#include "visual_servoing_scara/scara_ik.h"
+#include "visual_servoing_scara/scara_fk.h"
+#include "visual_servoing_scara/scara_vel_control.h"
 #include <sensor_msgs/JointState.h>
 #include <image_transport/image_transport.h>
 #include <image_geometry/pinhole_camera_model.h>

@@ -6,11 +6,11 @@
 #include "Utils.hpp"
 #include "ScaraConstants.hpp"
 #include "ScaraKinematics.hpp"
-#include "scara_gazebo/Float64Array.h"
+#include "visual_servoing_scara/Float64Array.h"
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
-//#include "scara_gazebo/scara_qd_to_twist.h"
-//#include "scara_gazebo/scara_twist_to_qd.h"
+//#include "visual_servoing_scara/scara_qd_to_twist.h"
+//#include "visual_servoing_scara/scara_twist_to_qd.h"
 
 
 namespace scara
@@ -25,7 +25,7 @@ namespace scara
 
 		// Establish all necessary connections
 		setUp_ROS_Communication();
-		ROS_INFO("scara_gazebo all services and publishers up and running . . .");
+		ROS_INFO("visual_servoing_scara all services and publishers up and running . . .");
 
 
 		// Create Kinematics object after brining up ros parameter server
@@ -60,8 +60,8 @@ namespace scara
 	}
 
 
-	bool ROS_Logistics::srv_scara_fk(scara_gazebo::scara_fk::Request& req,
-					  	  	  	  	 scara_gazebo::scara_fk::Response& res)
+	bool ROS_Logistics::srv_scara_fk(visual_servoing_scara::scara_fk::Request& req,
+					  	  	  	  	 visual_servoing_scara::scara_fk::Response& res)
 	{
 		// Compute FK of the scara bot
 		Vector7d finalPose;
@@ -72,8 +72,8 @@ namespace scara
 	}
 
 
-	bool ROS_Logistics::srv_scara_ik(scara_gazebo::scara_ik::Request& req,
-					  	  	  	  	 scara_gazebo::scara_ik::Response& res)
+	bool ROS_Logistics::srv_scara_ik(visual_servoing_scara::scara_ik::Request& req,
+					  	  	  	  	 visual_servoing_scara::scara_ik::Response& res)
 	{
 		// Compute IK of the scara bot
 		Vector7d goalPose;
@@ -98,10 +98,10 @@ namespace scara
 	}
 
 
-	bool ROS_Logistics::srv_vel_control(scara_gazebo::scara_vel_control::Request& req,
-	  	  	  	 	 	 	 	 	 	scara_gazebo::scara_vel_control::Response& res)
+	bool ROS_Logistics::srv_vel_control(visual_servoing_scara::scara_vel_control::Request& req,
+	  	  	  	 	 	 	 	 	 	visual_servoing_scara::scara_vel_control::Response& res)
 	{
-		scara_gazebo::Float64Array desired_q;
+		visual_servoing_scara::Float64Array desired_q;
 		desired_q.data = req.q;
 		m_pub_velCmd.publish(desired_q);
 		res.status = true;
@@ -123,7 +123,7 @@ namespace scara
 
 
 		// Publish commands to control the robot
-		m_pub_velCmd = m_node->advertise<scara_gazebo::Float64Array>(topic_joint_pos_cmd, queue_size);
+		m_pub_velCmd = m_node->advertise<visual_servoing_scara::Float64Array>(topic_joint_pos_cmd, queue_size);
 		m_pub_scaraPose = m_node->advertise<geometry_msgs::Pose>(topic_scara_pose, queue_size);
 
 

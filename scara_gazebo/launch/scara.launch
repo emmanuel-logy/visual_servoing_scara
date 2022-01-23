@@ -11,7 +11,7 @@
 	    <arg name="headless" value="false"/> 		<!-- Inert - see gazebo_ros_pkgs issue #491 -->
 	    <arg name="recording" value="false"/>
 	    <arg name="debug" value="false"/>
-	    <arg name="world_name" value="$(find scara_gazebo)/scara_gazebo/worlds/scara_pbvs.world"/>
+	    <arg name="world_name" value="$(find visual_servoing_scara)/scara_gazebo/worlds/scara_pbvs.world"/>
 	</include>
 	
 	
@@ -20,9 +20,9 @@
 		 The param name, "robot_description" shouldn't be changed because joint_state_publisher looks for 
 		 a parameter with this specific name later when start that node as well -->
 		 
-	<arg name="model_path" default="$(find scara_gazebo)/scara_description/urdf/scara.xacro"/>
-	<arg name="params_path" default="$(find scara_gazebo)/scara_description/urdf/scara_config.yaml"/>
-	<rosparam file="$(find scara_gazebo)/scara_description/urdf/scara_config.yaml" command="load"/>
+	<arg name="model_path" default="$(find visual_servoing_scara)/scara_description/urdf/scara.xacro"/>
+	<arg name="params_path" default="$(find visual_servoing_scara)/scara_description/urdf/scara_config.yaml"/>
+	<rosparam file="$(find visual_servoing_scara)/scara_description/urdf/scara_config.yaml" command="load"/>
 	<param name="robot_description" command="$(find xacro)/xacro $(arg model_path) robot_config_path:=$(arg params_path) " />
 	
 	<node 	name="urdf_spawner_robot" 
@@ -39,7 +39,7 @@
 	
 	<!-- ################################################################################################################# -->
     <!-- Spawn the object into Gazebo -->
-   	<arg name="object_model_path" default="$(find scara_gazebo)/scara_description/urdf/object.xacro"/>
+   	<arg name="object_model_path" default="$(find visual_servoing_scara)/scara_description/urdf/object.xacro"/>
 	<param name="object_description" command="$(find xacro)/xacro $(arg object_model_path)" />
    	
     <node 	name="urdf_spawner_object" 
@@ -71,7 +71,7 @@
 	
 	<!-- ################################################################################################################# -->
 	<!-- Load joint controller configurations from YAML file to parameter server -->
-	<rosparam file="$(find scara_gazebo)/scara_controller/config/scara_control.yaml" command="load"/>
+	<rosparam file="$(find visual_servoing_scara)/scara_controller/config/scara_control.yaml" command="load"/>
 	
 	<!-- load the controllers for Position control-->
 	<node 	name="controller_spawner" 
@@ -98,14 +98,14 @@
 	<!-- ################################################################################################################# -->
 	<!-- Load our kinematics node -->
 	<node 	name="scara_kinematics_node" 
-			pkg="scara_gazebo" 
+			pkg="visual_servoing_scara" 
 			type="scara_kinematics" 
 			output="screen" /> 
 	
 	<!-- ################################################################################################################# -->
 	<!-- Load our visual servoing node -->
 	<node 	name="scara_visual_servoing_node" 
-			pkg="scara_gazebo" 
+			pkg="visual_servoing_scara" 
 			type="visual_servoing" 
 			output="screen" /> 
 	<!-- ################################################################################################################# -->
