@@ -31,7 +31,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 
-
+<br><br>
 ---
 ### Deployment Diagram using UML
 <figure>
@@ -45,6 +45,8 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
+
+<br><br>
 ---
 ### High Level Design
 <figure>
@@ -56,6 +58,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
+<br><br>
 ---
 ### Tools and Frameworks
 **ROS Version:** Noetic
@@ -76,7 +79,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
-
+<br><br>
 ---
 ## <u>Work done behind the scenes</u>:
  
@@ -128,9 +131,9 @@ Another XACRO file was written to preserve the modularity of xacro files.
 
 
 
-
+<br><br>
 ---
-#### Building
+## Building
 
 To build from source, clone the latest version from this repository into your catkin workspace and compile the package using
 
@@ -141,7 +144,7 @@ To build from source, clone the latest version from this repository into your ca
 
 
 
-
+<br><br>
 ---
 ## Usage
 
@@ -166,6 +169,7 @@ To build from source, clone the latest version from this repository into your ca
     
 	$ rosbag play 2022-01-22-16-27-57.bag /scara/camera1/image_raw:=/rec_vid
 
+<br><br>
 ---
     
     
