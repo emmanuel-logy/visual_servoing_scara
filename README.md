@@ -32,7 +32,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 
-<br>
+
 ---
 ## Deployment Diagram using UML
 <figure>
