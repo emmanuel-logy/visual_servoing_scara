@@ -11,7 +11,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 </figure>
 
 
-<br>
+
 ##### Demo 2 - Visual Servoing . . . *playback using rosbag* !!!
 <figure>
     <img src="media/demo2_rosbag.gif" height="360" width="672" />
@@ -111,7 +111,7 @@ Another XACRO file was written to preserve the modularity of xacro files.
         <br>
         
     - **Visual Servoing using PCL**:     
-       - *Possible future work*
+       - *Possible future work* <br>
 
 
 - **ROS Plugins**: <br> 
