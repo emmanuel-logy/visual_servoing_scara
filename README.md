@@ -135,7 +135,7 @@ Another XACRO file was written to preserve the modularity of xacro files.
 To build from source, clone the latest version from this repository into your catkin workspace and compile the package using
 
 	$ cd catkin_workspace/src
-	$ git clone https://github.com/KavitShah1998/Combined_Astar_with_RRTstar_in_ROS
+	$ git clone https://github.com/emmanuel-logy/visual_servoing_scara.git
 	$ cd ..
 	$ catkin_make
 
