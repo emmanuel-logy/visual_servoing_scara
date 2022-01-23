@@ -1,7 +1,7 @@
 # Visual Servoing - SCARA Robot
 
 ## Overview
-In this project, I have implemented **Position Based Visual Servoing (PBVS)** for the well-known **SCARA** robot. 
+In this project, I have implemented **Position Based Visual Servoing (PBVS)** for the **SCARA** robot. 
 
 
 ##### Demo 1 - Visual Servoing . . . *in action* !!!
@@ -31,7 +31,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 
-<br><br>
+
 ---
 ### Deployment Diagram using UML
 <figure>
@@ -46,7 +46,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
-<br><br>
+
 ---
 ### High Level Design
 <figure>
@@ -58,7 +58,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
-<br><br>
+
 ---
 ### Tools and Frameworks
 **ROS Version:** Noetic
@@ -78,10 +78,8 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 
-
-<br><br>
 ---
-## <u>Work done behind the scenes</u>:
+## Contributions:
  
 - **Robot Description**: <br>
 The XACRO file for simulating the robot in Gazebo physics simulator was written from scratch. Further, the xacro file reads the robot's link diemensions from a configuration file called *"scara_config.yaml."* This is to ease the loading of these diemensions to the ROS param server and also to be able to change the robot's size without touching the complex looking xacro file. 
@@ -131,30 +129,33 @@ Another XACRO file was written to preserve the modularity of xacro files.
 
 
 
-<br><br>
 ---
 ## Building
 
 To build from source, clone the latest version from this repository into your catkin workspace and compile the package using
 
+	```bash
 	$ cd catkin_workspace/src
 	$ git clone https://github.com/emmanuel-logy/visual_servoing_scara.git
 	$ cd ..
 	$ catkin_make
+	```
 
 
-
-<br><br>
 ---
 ## Usage
 
 * **STEP 1**: Source your catkin_workspace with 
 	
+	```bash
 	$ source ./devel/setup.bash
+	```
 
 * **STEP 2**: Launch the SCARA with the nodes necessary for performing the PBVS
 	
+	```bash
 	$ roslaunch visual_servoing_scara scara.launch
+	```
 
 * **[Optional 1]**:
 
@@ -167,9 +168,11 @@ To build from source, clone the latest version from this repository into your ca
     - **scara_control.yaml** <br>
     To play back the rosbag	
     
+    ```bash
 	$ rosbag play 2022-01-22-16-27-57.bag /scara/camera1/image_raw:=/rec_vid
-
-<br><br>
+	```
+	
+	
 ---
     
     
