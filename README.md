@@ -33,7 +33,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 ---
-### Deployment Diagram using UML
+## Deployment Diagram using UML
 <figure>
     <img src="media/Deployment_Diagram.png" height="480" width="896" />
     <figcaption><i>As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
@@ -48,7 +48,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 ---
-### High Level Design
+###High Level Design
 <figure>
     <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
     <figcaption><i>The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.</i></figcaption>
@@ -60,7 +60,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 ---
-### Tools and Frameworks
+## Tools and Frameworks
 **ROS Version:** Noetic
 
 **Gazebo Version:** 11.9.1
@@ -79,7 +79,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 ---
-## Contributions:
+## Contributions
  
 - **Robot Description**: <br>
 The XACRO file for simulating the robot in Gazebo physics simulator was written from scratch. Further, the xacro file reads the robot's link diemensions from a configuration file called *"scara_config.yaml."* This is to ease the loading of these diemensions to the ROS param server and also to be able to change the robot's size without touching the complex looking xacro file. 
