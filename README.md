@@ -7,18 +7,19 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ### Demo 1 - Visual Servoing . . . *in action* !!!
 <figure>
     <img src="media/demo1_PBVS.gif" height="360" width="672">
-    <figcaption><i>The goal for the SCARA robot is to track the center of the object and hit the target once the end effector stabilizes.</i></figcaption>
 </figure>
 
+> :information_source: The goal for the SCARA robot is to track the center of the object and hit the target once the end effector stabilizes.
 
 ---
 ### Demo 2 - Visual Servoing . . . *playback using rosbag* !!!
 <figure>
     <img src="media/demo2_rosbag.gif" height="360" width="672" />
-    <figcaption><i>Here the original environment is changed by moving the table aside. However, we can make the robot behave as it did before using recorded information through rosbag utility.</i></figcaption>
 </figure>
 
-> **Why is this useful?** <br>
+> :information_source: Here the original environment is changed by moving the table aside. However, we can make the robot behave as it did before using recorded information through rosbag utility.
+
+> :question: **Why is this useful?** <br>
 *Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 
 
@@ -26,8 +27,9 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!  
 <figure>
     <img src="media/demo3_plots.gif" height="360" width="672" />
-    <figcaption><i>The plots represent the movement of each joint during the visual servoing process. As we can observe, the change is gradual and this shows that the controller I've implemented and the PID gains tuned are doing a pretty good job.</i></figcaption>
 </figure>
+
+> :information_source: The plots represent the movement of each joint during the visual servoing process. As we can observe, the change is gradual and this shows that the controller I've implemented and the PID gains tuned are doing a pretty good job.
 
 
 
