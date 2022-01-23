@@ -11,7 +11,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 </figure>
 
 
-<br><br>
+<br>
 ##### Demo 2 - Visual Servoing . . . *playback using rosbag* !!!
 <figure>
     <img src="media/demo2_rosbag.gif" height="360" width="672" />
@@ -19,10 +19,10 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 </figure>
 
 > **Why is this useful?** <br>
-*Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.** <br><br>
+*Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 
 
-
+<br>
 ##### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!  
 <figure>
     <img src="media/demo3_plots.gif" height="360" width="672" />
@@ -32,7 +32,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 
 
 
-<br><br>
+<br>
 ---
 ## Deployment Diagram using UML
 <figure>
@@ -49,7 +49,7 @@ The boxes highlighted in the <span style="color:blue">blue</span> are the nodes 
 
 
 ---
-###High Level Design
+## High Level Design
 <figure>
     <img src="media/Logic_BlockDiagram.png" height="480" width="896" />
     <figcaption><i>The following block diagram gives a quick overview of the logic employed to perform Postion Based Visual Servoing for the SCARA robot.</i></figcaption>
