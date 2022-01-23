@@ -35,7 +35,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 ---
 ### Deployment Diagram using UML
 <figure>
-    <img src="media/Deployment_Diagram.png" height="420" width="784" />
+    <img src="media/Deployment_Diagram.png" height="480" width="896" />
     <figcaption><i>As seen, all the communication between nodes and Gazebo simulator takes place over ROS Topics and ROS Services.</i></figcaption>
 </figure>
 
