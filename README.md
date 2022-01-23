@@ -3,7 +3,7 @@
 ## Overview
 In this project, I have implemented **Position Based Visual Servoing (PBVS)** for the **SCARA** robot. 
 
-
+---
 ### Demo 1 - Visual Servoing . . . *in action* !!!
 <figure>
     <img src="media/demo1_PBVS.gif" height="360" width="672">
@@ -11,7 +11,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 </figure>
 
 
-
+---
 ### Demo 2 - Visual Servoing . . . *playback using rosbag* !!!
 <figure>
     <img src="media/demo2_rosbag.gif" height="360" width="672" />
@@ -22,7 +22,7 @@ In this project, I have implemented **Position Based Visual Servoing (PBVS)** fo
 *Let's assume that the robot had a problem in the field. In software engineering, one of the best possible way to fix a bug is to be able to replicate the same issue. In the below video, even though the original environment is changed with the table being pushed away, we can still see the image and movements of the robot which will immensely help in fixing the bug in the field.**
 
 
-
+---
 ### Demo 3 - Visual Servoing . . . *plots using rosbag on rqt_gui* !!!  
 <figure>
     <img src="media/demo3_plots.gif" height="360" width="672" />
